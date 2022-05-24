@@ -12,7 +12,9 @@ import pymysql
 from DatosPersona import IdPersona, cargar_modelo
  
  
-from mlflow import log_metric, log_param, log_artifact
+#from mlflow import log_metric, log_param, log_artifact
+#from mlflow.tracking import MlflowClient
+import mlflow
 import psutil
 import os
 
@@ -123,7 +125,6 @@ class LCCRecognition(Frame):
         self.hands = self.mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
         self.mpDraw = mp.solutions.drawing_utils
         self.modelo_manos = tf_keras.load_model('mp_hand_gesture')
-        print(self.modelo_manos)
         self.f = open('gesture.names', 'r')
         self.classNames = self.f.read().split('\n')
         self.f.close()    
@@ -215,9 +216,9 @@ class LCCRecognition(Frame):
                                 if self.PersonaEnPosicion():
                                     gestoMano = self.DetectarMano(frame)
                                     #Se mostrará información de lo que hará el programa, ejemplo "Buscar información, feedback negativo, postiivo,"
-                                    self.MensajeMano(frame,gestoMano,persona_reconocida,self.font,distancia)
-                                    log_metric(key="CPU USE", value=(l3/os.cpu_count()) * 100)
-                                    log_metric(key="precision", value=distancia)              
+                                    self.MensajeMano(frame,gestoMano,persona_reconocida,self.font,distancia)  
+                                    #client.log_metric(run_id=run.info.run_id, key="Distancia  -" + str(persona_reconocida) + "-", value=distancia)
+                                    #log_metric(key="Distancia  -" + str(persona_reconocida) + "-", value=distancia)     
 
                             else:
                                 persona_reconocida = "Desconocido"
@@ -331,7 +332,7 @@ class LCCRecognition(Frame):
         
         """ MLFLOW ... QUEDA PENDIENTE POR QUE TODAVIA NO ENTIENDO COMO FUNCIONA"""
         #log_param("matricula alumno", persona_reconocida)
-        log_metric(key="feedback", value=feedback)
+        #log_metric(key="feedback", value=feedback)
 
              
 
@@ -413,6 +414,10 @@ if __name__ == "__main__":
     window = Tk()    
     window.geometry("1200x650")
     window.configure(bg = "#ffffff") 
-
-
+    #mlflow.set_tracking_uri("file:/C:/Users/Sebastian Rivera/Documents/Proyecto_Final/mlruns")
+    #client = MlflowClient()
+    #experiment_id = client.get_experiment_by_name("Modelo LBPH")
+    #experiment_id = "2"
+    #run = client.create_run(experiment_id)
+    #print("run_id: {}".format(run.info.run_id))
     LCCRecognition(window,model='./model/20170512-110547.pb',id_folder=['./ids/'],umbral=1.09  )

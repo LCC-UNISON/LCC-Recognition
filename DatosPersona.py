@@ -35,7 +35,7 @@ class IdPersona:
         fotos_alineadas, id_image_paths = self.detect_id_faces(carpeta_imagenes)
         feed_dict = {images_placeholder: fotos_alineadas, phase_train_placeholder: False}
         
-        #junta los embeddings de la carpeta de todas las fotos y del dataset descargado de internet
+        #junta los embeddings de la carpeta de todas las fotos y de nuestro dataset
         #el primer parametro (embedding) es el tensor de caracteristicas del modelo preentrenado
         self.embeddings = sess.run(embeddings, feed_dict=feed_dict)
 
