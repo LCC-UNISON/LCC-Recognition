@@ -9,7 +9,7 @@ La aplicación intenta buscar un rostro en la webcam. Posteriormente, se toma un
 
 ## ¿Qué librerias necesito para el funcionamiento?
 En el repositorio se deja un archivo requeriments.txt en donde están las librerías utilizadas
-Estas se pueden instalar utilizando pip install -r requirements.txt
+Estas se pueden instalar utilizando pip install -r requirements.txt con una versión de python 3.7.8 RC1
 
 *   OpenCv
 *   Tensorflow
