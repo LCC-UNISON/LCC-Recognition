@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCC-Recognition</title>
+
+  <style>
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      /* Height of the footer */
+      text-align: center;
+      background-color: rgba(0, 73, 144, 1);
+      color: white;
+    }
+
+    footer a {
+      color: #FE4B74;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    header {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin: 0px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 0px;
+      padding-bottom: 10px;
+      text-align: center;
+    }
+
+
+    .card {
+      max-width: 350px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid #d9d9d9;
+    }
+
+    .card .header {
+      display: flex;
+      align-items: center;
+    }
+
+    .header .img {
+      height: 75px;
+      width: 75px;
+      background: #d9d9d9;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header .details {
+      margin-left: 20px;
+    }
+
+    .details span {
+      display: block;
+      background: #d9d9d9;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .details .name {
+      height: 15px;
+      width: 100px;
+    }
+
+    .details .about {
+      height: 13px;
+      width: 150px;
+      margin-top: 10px;
+    }
+
+    .card .description {
+      margin: 25px 0;
+    }
+
+    .description .line {
+      background: #d9d9d9;
+      border-radius: 10px;
+      height: 13px;
+      margin: 10px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .description .line-1 {
+      width: calc(100% - 15%);
+    }
+
+    .description .line-3 {
+      width: calc(100% - 40%);
+    }
+
+    .card .btns {
+      display: flex;
+    }
+
+    .card .btns .btn {
+      height: 45px;
+      width: 100%;
+      background: #d9d9d9;
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btns .btn-1 {
+      margin-right: 8px;
+    }
+
+    .btns .btn-2 {
+      margin-left: 8px;
+    }
+
+    .header .img::before,
+    .details span::before,
+    .description .line::before,
+    .btns .btn::before {
+      position: absolute;
+      content: "";
+      height: 100%;
+      width: 100%;
+      background-image: linear-gradient(to right, #d9d9d9 0%, rgba(0, 0, 0, 0.05) 20%, #d9d9d9 40%, #d9d9d9 100%);
+      background-repeat: no-repeat;
+      background-size: 450px 400px;
+      animation: shimmer 1s linear infinite;
+    }
+
+    .header .img::before {
+      background-size: 650px 600px;
+    }
+
+    .details span::before {
+      animation-delay: 0.2s;
+    }
+
+    .btns .btn-2::before {
+      animation-delay: 0.22s;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -450px 0;
+      }
+
+      100% {
+        background-position: 450px 0;
+      }
+    }
+
+
+    footer {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+    }
+
+    footer .links a {
+      display: flex;
+      line-height: 30px;
+      text-decoration: none;
+      color: #222;
+      font-weight: 700;
+      font-size: 20px;
+      z-index: 999;
+    }
+
+    footer .links a>i {
+      line-height: 30px;
+      padding-right: 15px;
+    }
+
+    footer .links a:last-child i {
+      color: orange;
+    }
+
+    footer .links .coffee {
+      width: 300px;
+      position: fixed;
+      bottom: 2.5rem;
+      left: -0rem;
+      z-index: -99;
+    }
+
+
+    .list .item .card-demo .infos .thumbnail,
+    .skeleton-bone {
+      position: relative;
+      overflow: hidden;
+      background-color: #ececec;
+    }
+
+    .list .item .card-demo .infos .thumbnail:before,
+    .skeleton-bone:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transform: translateX(-100%);
+      content: "";
+      background: linear-gradient(0.25turn, transparent, #fff, transparent);
+      pointer-events: none;
+      opacity: 0.8;
+      animation: skeleton-animation 2s infinite;
+    }
+
+    html {
+      font-size: 12px;
+      line-height: 2em;
+      font-family: "Baloo Bhaina 2", cursive;
+      color: #434b52;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: block;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .skeleton-bone {
+      display: block;
+    }
+
+    .btn-fill {
+      cursor: pointer;
+      padding: 6px 12px 3px 12px;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1em;
+      text-transform: uppercase;
+      background-color: #e15554;
+      border-radius: 10px;
+      color: #fff;
+      position: absolute;
+      right: 100%;
+      top: 32px;
+      transition: 0.5s ease;
+    }
+
+    .btn-fill:hover {
+      background-color: #e1548f;
+    }
+
+    .btn-fill.disabled {
+      pointer-events: none;
+      filter: grayscale(100%);
+      opacity: 0.2;
+    }
+
+    .list {
+      position: relative;
+    }
+
+    .list .item {
+      padding: 32px;
+      border-bottom: 1px solid #fafafa;
+      position: relative;
+    }
+
+    .list .item .card-demo {
+      display: flex;
+      flex-direction: row;
+      padding: 24px;
+      border-radius: 6px;
+      box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .list .item .card-demo .infos {
+      width: 35%;
+      margin-right: 16px;
+    }
+
+    .list .item .card-demo .infos .thumbnail {
+      width: 100%;
+      padding-bottom: 56.25%;
+      background-size: cover;
+    }
+
+    .list .item .card-demo .infos .thumbnail:not(:empty)::before {
+      display: none;
+    }
+
+    .list .item .card-demo .infos .thumbnail img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .list .item .card-demo .infos .date {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .list .item .card-demo .infos .date .skeleton-bone {
+      width: 100%;
+      max-width: 70%;
+      height: 16px;
+    }
+
+    .list .item .card-demo .title {
+      width: 65%;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .list .item .card-demo .title .skeleton-bone {
+      width: 100%;
+      height: 20px;
+    }
+
+    .list .item .card-demo .title .skeleton-bone:not(:first-child) {
+      margin: 12px 0 0 0;
+    }
+
+    .list .item .card-demo .title .skeleton-bone:not(:only-child):last-child {
+      max-width: 70%;
+    }
+
+    @keyframes skeleton-animation {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      30% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .__card {
+      padding: 1rem;
+      width: 30rem;
+      background-color: aliceblue;
+      border-radius: 4px;
+
+      display: grid;
+      grid-template-columns: min-content 1fr;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+    }
+
+    .__card__img {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 4px;
+      background-color: orange;
+      margin-right: 1rem;
+    }
+
+    .__heading {
+      font-size: 1.4em;
+      margin-bottom: 4px;
+    }
+
+    .__para {
+      font-size: .8em;
+    }
+
+    .loading {
+      position: relative;
+      background-color: #b8b8b8;
+      overflow: hidden;
+
+    }
+
+    .__heading.loading,
+    .__para.loading {
+      margin-bottom: 1rem;
+      min-height: 40%;
+      border-radius: 4px;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateX(-100%);
+      background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, .5), transparent);
+      animation: loading 1s infinite;
+    }
+
+    @keyframes loading {
+      100% {
+        transform: translateX(100%);
+      }
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!-- CSS only -->
+
+</head>
+
+
+<!--display header-->
+<header>
+  <img src="https://cc.unison.mx/wp-content/themes/awaken/img/logo.jpg" />
+  <div>
+    <h1>Licenciatura en Ciencias de la Computación</h1>
+    <h2>Departamento de Matemáticas</h2>
+  </div>
+</header>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: rgba(247,161,26,1);">
+  <div class="container">
+    <div class="navbar-header" style="padding-left: 20%;">
+      <div style="font-size:25px;">
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+          <label class="form-check-label" for="inlineCheckbox1">Servicio Social</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+          <label class="form-check-label" for="inlineCheckbox2">Practicas Profesionales</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked>
+          <label class="form-check-label" for="inlineCheckbox3">Ofertas de Trabajo</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /navbar -->
+
+<br>
+
+
+
+<button class="btn btn-primary" style="margin-top: -10px;" onclick="mostrarDatos()">Obtener información de la
+  persona</button>
+<div class="row">
+  <div class="col-sm-3"> <img src="{{ url_for('video') }}" id="myImg" width=100%></div>
+  <div class="col-sm-3" >
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="col-sm-3" >
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div class="col-sm-3" >
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+    <div class="__card">
+      <div class="__card__img loading">
+      </div>
+      <div class="__card__text">
+        <h1 class="__heading loading"></h1>
+        <p class="__para loading"></p>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+
+
+<footer>
+  Diseñado por:
+  <p>Garcia Encinas Jesus Martin, Guerrero Vázquez Marco Antonio, Rivera de la Cruz Sebastian Guadalupe , Urías Páramo
+    Jesús Israel </p>
+</footer>
+
+<script>
+  function mostrarDatos() {
+    document.getElementById("myImg").width = "100";
+
+    const imgContainer = document.querySelector('.__card__img'),
+      __heading = document.querySelector('.__heading'),
+      para = document.querySelector('.__para');
+      console.log(imgContainer);
+
+    const img = document.createElement('img');
+    img.setAttribute('src','https://picsum.photos/120');
+    imgContainer.appendChild(img);
+  }
+</script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</html>

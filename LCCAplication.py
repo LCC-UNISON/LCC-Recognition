@@ -320,6 +320,7 @@ class LCCRecognition(Frame):
 
         if (className == 'live long'):
             if (self.SePuedeConsultar):
+                
                 msg = "Buscando tu informacion..."
                 self.BuscarDatosAlumno(persona_reconocida)  
                 self.TiempoParaBorrarDato = 0
