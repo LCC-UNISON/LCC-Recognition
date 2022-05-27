@@ -3,3 +3,4 @@ __pycache__/
 ids/
 model/
 borrar_ahorita/
+con_bd.py

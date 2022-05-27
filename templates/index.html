@@ -750,11 +750,10 @@
       </a>
       <br>
       <button class="btn btn-primary" style="margin-left: -150%; margin-top:10%;width: 30em; height: 5em;"
-        id="btnRecomendaciones" disabled> Más recomendaciones</button>
+        id="btnRecomendaciones" disabled> <a style="font-size: 18px;font-weight: bold;">Más recomendaciones</a></button>
       <button class="btn btn-danger" style=" width: 15em;margin-top:10%; height: 5em;" id="btnBorrar"
         onclick="borrarDatos()" disabled>
-        Borrar
-        información</button>
+        <a style="font-size: 18px;font-weight: bold;">Borrar información</a> </button>
 
 
     </div>
@@ -772,14 +771,15 @@
   <script type="text/javascript" src="/test/wp-content/themes/child/script/jquery.jcarousel.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+
+
   <script>
+    
     matriculaactual = ''
     btn = document.getElementById('btnBorrar');
 
-
     function mostrarDatos() {
       //document.getElementById("myImg").width = "100";
-
       var deferredData = new jQuery.Deferred();
       if (btn.disabled) {
         $.ajax({

@@ -248,11 +248,14 @@ class LCCRecognition(Frame):
             self.TiempoParaBorrarDato += 1
             self.YaSeConsulto = False
             #self.matricula = "Desconocido"
+            '''
+    YA NO SE VA A OCUPAR ESTA FUNCION DEBIDO A QUE SE BORRAN LOSD DATOS DESDE INDEX.HTML
         if self.TiempoParaBorrarDato > 30:
             #self.borrarDatos()
             self.YaSeConsulto = False
             print("Datos borrados")
             self.TiempoParaBorrarDato = 0
+            '''
 
     def DetectarMano(self, frame):
         x, y, c = frame.shape

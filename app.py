@@ -33,7 +33,6 @@ def index():
 
 @app.route('/video')
 def video():
-    #print(Response(recognition.Visualizar(),mimetype='multipart/x-mixed-replace; boundary=frame'))
     return Response(recognition.Visualizar(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/get_current_user')
@@ -45,6 +44,9 @@ def get_current_user():
         YaSeConsulto = recognition.YaSeConsulto,
         PersonaSeFue = recognition.PersonaSeFue(),
     )
+    
+    
+    
 if __name__=="__main__":
     app.run(debug=True)
     
