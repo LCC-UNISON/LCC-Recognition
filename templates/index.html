@@ -8,24 +8,6 @@
   <title>LCC-Recognition</title>
 
   <style>
-    footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      /* Height of the footer */
-      text-align: center;
-      background-color: rgba(0, 73, 144, 1);
-      color: white;
-    }
-
-    footer a {
-      color: #FE4B74;
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-
     body {
       margin: 0px;
       padding: 0px;
@@ -370,18 +352,22 @@
 
     .__card {
       padding: 1rem;
-      width: 30rem;
+      width: 37rem;
+      text-decoration: none;
       background-color: aliceblue;
       border-radius: 4px;
 
       display: grid;
       grid-template-columns: min-content 1fr;
+      text-overflow: ellipsis;
       box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
     }
 
     .__card__img {
-      width: 10rem;
-      height: 10rem;
+      width: 6rem;
+      text-decoration: none;
+
+      height: 6rem;
       border-radius: 4px;
       background-color: orange;
       margin-right: 1rem;
@@ -389,11 +375,23 @@
 
     .__heading {
       font-size: 1.4em;
+      text-overflow: ellipsis;
+
       margin-bottom: 4px;
+      margin-left: 4rem;
     }
 
     .__para {
-      font-size: .8em;
+      font-size: 1.2em;
+      margin-left: 4rem;
+      display: block;
+      white-space: wrap;
+      overflow: hidden;
+      text-align: justify;
+      text-overflow: ellipsis;
+      max-height: 5rem;
+
+
     }
 
     .loading {
@@ -427,6 +425,123 @@
         transform: translateX(100%);
       }
     }
+
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+
+
+
+
+
+    .flip-card-3D-wrapper {
+      width: 110%;
+      height: 70%;
+      max-width: 300px;
+      max-height: 500px;
+      position: relative;
+      -o-perspective: 900px;
+      -webkit-perspective: 900px;
+      -ms-perspective: 900px;
+      perspective: 900px;
+      margin: 0 auto;
+    }
+
+    #flip-card {
+      width: 120%;
+      height: 120%;
+
+      text-align: center;
+      margin: 50px auto;
+      position: absolute;
+      -o-transition: all 1s ease-in-out;
+      -webkit-transition: all 1s ease-in-out;
+      -ms-transition: all 1s ease-in-out;
+      transition: all 1s ease-in-out;
+      -o-transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
+
+    .do-flip {
+      -o-transform: rotateY(-180deg);
+      -webkit-transform: rotateY(-180deg);
+      -ms-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+    }
+
+    #flip-card-btn-turn-to-back,
+    #flip-card-btn-turn-to-front {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      cursor: pointer;
+      visibility: hidden;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: .7em;
+      padding: 0;
+      color: grey;
+      border: 1px solid grey;
+    }
+
+    #flip-card .flip-card-front,
+    #flip-card .flip-card-back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      -o-backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+      z-index: 2;
+      -webkit-box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+      -moz-box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+      box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+    }
+
+    #flip-card .flip-card-front {
+      border: 1px solid grey;
+    }
+
+    #flip-card .flip-card-back {
+      background: whitesmoke;
+      border: 1px solid grey;
+      -o-transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+
+    #flip-card .flip-card-front p,
+    #flip-card .flip-card-back p {
+      color: grey;
+      display: block;
+      position: absolute;
+      top: 40%;
+      width: 100%;
+
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      /* Height of the footer */
+      text-align: center;
+      background-color: rgba(0, 73, 144, 1);
+      color: white;
+    }
+
+    footer a {
+      color: #FE4B74;
+      font-weight: 500;
+      text-decoration: none;
+    }
   </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -434,185 +549,399 @@
 
 </head>
 
+<body>
 
-<!--display header-->
-<header>
-  <img src="https://cc.unison.mx/wp-content/themes/awaken/img/logo.jpg" />
-  <div>
-    <h1>Licenciatura en Ciencias de la Computación</h1>
-    <h2>Departamento de Matemáticas</h2>
-  </div>
-</header>
-<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: rgba(247,161,26,1);">
-  <div class="container">
-    <div class="navbar-header" style="padding-left: 20%;">
-      <div style="font-size:25px;">
-
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
-          <label class="form-check-label" for="inlineCheckbox1">Servicio Social</label>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Mas información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
-          <label class="form-check-label" for="inlineCheckbox2">Practicas Profesionales</label>
+        <div class="modal-body">
+          ...
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked>
-          <label class="form-check-label" for="inlineCheckbox3">Ofertas de Trabajo</label>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Mandar más información a tu correo institucional</button>
         </div>
       </div>
     </div>
+  </div>
+  <!--display header-->
+  <header>
+
+    <img src="https://cc.unison.mx/wp-content/themes/awaken/img/logo.jpg" />
+    <div>
+      <h1>Licenciatura en Ciencias de la Computación</h1>
+      <h2>Departamento de Matemáticas</h2>
+    </div>
+  </header>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: rgba(247,161,26,1);">
+    <div class="container">
+      <div class="navbar-header" style="padding-left: 20%;">
+        <div style="font-size:25px;">
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+            <label class="form-check-label" for="inlineCheckbox1">Servicio Social</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked>
+            <label class="form-check-label" for="inlineCheckbox2">Practicas Profesionales</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked>
+            <label class="form-check-label" for="inlineCheckbox3">Ofertas de Trabajo</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /navbar -->
+
+  <br>
+
+
+  <div id="txtsaludo" style="margin-left:8%;font-size: 20px;font-weight: bold;"></div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="flip-card-3D-wrapper">
+        <div id="flip-card">
+          <div class="flip-card-front">
+            <img src="{{ url_for('video') }}" id="myImg" width=100%>
+            <br>
+
+            <img src="{{ url_for('static', filename = 'indicaciones.png') }}" id="indicaciones" width=102% height="50%"
+              style="margin-top:2px; margin-left: -6px;">
+          </div>
+          <div class="flip-card-back" style="padding: 10px;">
+            <div class="card">
+              <ul class="list-group list-group-flush" style="font-size: 18px;">
+                <li class="list-group-item">Jesus Martin Garcia Encinas</li>
+                <li class="list-group-item">La última vez que te ví fue el jueves 26 de marzo del 2022</li>
+                <li class="list-group-item">Creditos: 225/383 - 58.75%</li>
+                <li class="list-group-item">Servicio social: No aplica</li>
+                <li class="list-group-item">Practicas Profesionales: No aplica</li>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_1">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_1"></h1>
+            <p class="__para loading" id="descripcion_1"></p>
+
+          </div>
+        </div>
+
+      </a>
+
+      <br>
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_2">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_2"></h1>
+            <p class="__para loading" id="descripcion_2"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_3">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_3"></h1>
+            <p class="__para loading" id="descripcion_3"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+    </div>
+    <div class="col-sm-3">
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_4">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_4"></h1>
+            <p class="__para loading" id="descripcion_4"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_5">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_5"></h1>
+            <p class="__para loading" id="descripcion_5"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_6">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_6"></h1>
+            <p class="__para loading" id="descripcion_6"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+    </div>
+    <div class="col-sm-3">
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_7">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_7"></h1>
+            <p class="__para loading" id="descripcion_7"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+        <div class="__card">
+
+          <div class="__card__img loading" id="imagen_8">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_8"></h1>
+            <p class="__para loading" id="descripcion_8"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+      <a href="#" style="text-decoration: none;color:black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+        <div class="__card">
+          <div class="__card__img loading" id="imagen_9">
+          </div>
+          <div class="__card__text">
+            <h1 class="__heading loading" id="titulo_9"></h1>
+            <p class="__para loading" id="descripcion_9"></p>
+          </div>
+        </div>
+      </a>
+      <br>
+      <button class="btn btn-primary" style="margin-left: -150%; margin-top:10%;width: 30em; height: 5em;"
+        id="btnRecomendaciones" disabled> Más recomendaciones</button>
+      <button class="btn btn-danger" style=" width: 15em;margin-top:10%; height: 5em;" id="btnBorrar"
+        onclick="borrarDatos()" disabled>
+        Borrar
+        información</button>
+
+
+    </div>
 
   </div>
-</div><!-- /navbar -->
-
-<br>
 
 
+  <footer>
+    Diseñado por:
+    <h4>Garcia Encinas Jesus Martin, Guerrero Vázquez Marco Antonio, Rivera de la Cruz Sebastian Guadalupe , Urías
+      Páramo
+      Jesús Israel </h4>
+  </footer>
 
-<button class="btn btn-primary" style="margin-top: -10px;" onclick="mostrarDatos()">Obtener información de la
-  persona</button>
-<div class="row">
-  <div class="col-sm-3"> <img src="{{ url_for('video') }}" id="myImg" width=100%></div>
-  <div class="col-sm-3" >
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-  </div>
-  <div class="col-sm-3" >
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-  </div>
-  <div class="col-sm-3" >
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-    <div class="__card">
-      <div class="__card__img loading">
-      </div>
-      <div class="__card__text">
-        <h1 class="__heading loading"></h1>
-        <p class="__para loading"></p>
-      </div>
-    </div>
-    <br>
-  </div>
-</div>
+  <script type="text/javascript" src="/test/wp-content/themes/child/script/jquery.jcarousel.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <script>
+    matriculaactual = ''
+    btn = document.getElementById('btnBorrar');
 
 
-<footer>
-  Diseñado por:
-  <p>Garcia Encinas Jesus Martin, Guerrero Vázquez Marco Antonio, Rivera de la Cruz Sebastian Guadalupe , Urías Páramo
-    Jesús Israel </p>
-</footer>
+    function mostrarDatos() {
+      //document.getElementById("myImg").width = "100";
 
-<script>
-  function mostrarDatos() {
-    document.getElementById("myImg").width = "100";
+      var deferredData = new jQuery.Deferred();
+      if (btn.disabled) {
+        $.ajax({
+          type: "GET",
+          url: "/get_current_user",
+          dataType: "json",
+          success: deferredData.resolve(),
+          complete: function (xhr, textStatus) {
+            datos_persona = JSON.parse(xhr.responseText);
+            //console.log(datos_persona);
+            // console.log("Matricula anterior: " + matriculaactual);
+            //console.log("Matricula reconocida: " + datos_persona.matricula);
+            //console.log(Boolean(!datos_persona.gestoMano.localeCompare('live long') || !datos_persona.gestoMano.localeCompare('stop')));
 
-    const imgContainer = document.querySelector('.__card__img'),
-      __heading = document.querySelector('.__heading'),
-      para = document.querySelector('.__para');
-      console.log(imgContainer);
+            //console.log(!datos_persona.matricula.localeCompare("Desconocido"));
+            //console.log(Boolean(datos_persona.matricula != null && datos_persona.matricula.localeCompare("Desconocido")));
 
-    const img = document.createElement('img');
-    img.setAttribute('src','https://picsum.photos/120');
-    imgContainer.appendChild(img);
-  }
-</script>
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+            if (datos_persona.matricula != null && datos_persona.matricula.localeCompare("Desconocido")) {
+              //console.log("Persona que reconocí: " + datos_persona.matricula);
+              if ((!datos_persona.gestoMano.localeCompare('live long') || !datos_persona.gestoMano.localeCompare('stop')) && !datos_persona.SePuedeConsultar) {
+                if (btn.disabled) {
+                  setTimeout(RellenarDatos, 1000)
+                  $("#btnRecomendaciones").prop("disabled", false);
+                  $("#btnBorrar").prop("disabled", false);
+                }
+              }
+
+
+            }
+            else {
+              console.log("No reconocí a nadie");
+            }
+
+
+            matriculaactual = datos_persona.matricula
+
+          }
+        });
+      }
+      setTimeout(mostrarDatos, 1000);
+
+    }
+
+    async function ObtenerInfo() {
+      let response = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=6bb19fd6&app_key=dc644f6b82a900d5f67a769f3a8ec4f6`);
+      let data = await response.json()
+      //console.log(data.results)
+      return data
+    }
+
+    async function RellenarDatos() {
+      let trabajosAPI = await fetch(`https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=6bb19fd6&app_key=dc644f6b82a900d5f67a769f3a8ec4f6`);
+      let trabajos = await trabajosAPI.json()
+
+      $("#btnRecomendaciones").prop("disabled", false);
+      $("#btnBorrar").prop("disabled", false);
+      for (let index = 1; index <= 9; index++) {
+        console.log(trabajos.results[index]);
+
+        const imgContainer = document.getElementById('imagen_'.concat(index)),
+          __heading = document.getElementById('titulo_'.concat(index)),
+          __para = document.getElementById('descripcion_'.concat(index));
+        const img = document.createElement('img');
+        //console.log(trabajos.results);
+        img.setAttribute('src', 'https://random.imagecdn.app/100/100');
+        imgContainer.appendChild(img);
+
+        __heading.textContent = trabajos.results[index].title;
+        __para.textContent = trabajos.results[index].description;
+
+        imgContainer.classList.remove('loading');
+        __heading.classList.remove('loading');
+        __para.classList.remove('loading');
+        setTimeout(VoltearCarta, 500);
+
+      }
+
+      //console.log($( "#btnRecomendaciones" ).disabled);
+
+
+    }
+
+    function VoltearCarta() {
+      document.getElementById('flip-card').classList.toggle('do-flip');
+    }
+
+    function borrarDatos() {
+      for (let index = 1; index <= 9; index++) {
+        const imgContainer = document.getElementById('imagen_'.concat(index)),
+          __heading = document.getElementById('titulo_'.concat(index)),
+          __para = document.getElementById('descripcion_'.concat(index));
+        // console.log(imgContainer);
+
+        let content = (document.getElementById('imagen_'.concat(index)));
+        let lastChild = content.lastChild;
+        lastChild.remove();
+
+        __heading.textContent = ' ';
+        __para.textContent = '';
+
+        imgContainer.classList.add('loading');
+        __heading.classList.add('loading');
+        __para.classList.add('loading');
+        setTimeout(VoltearCarta, 500);
+
+      }
+
+
+      $("#btnRecomendaciones").prop("disabled", true);
+      $("#btnBorrar").prop("disabled", true);
+    }
+  </script>
+
+
+  <script>
+
+    function mostrarSaludo() {
+
+      fecha = new Date();
+      hora = fecha.getHours();
+
+      if (hora >= 0 && hora < 12) {
+        texto = "Buenos días";
+      }
+
+      if (hora >= 12 && hora < 18) {
+        texto = "Buenas tardes";
+      }
+
+      if (hora >= 18 && hora < 24) {
+        texto = "Buenas noches";
+      }
+      document.getElementById('txtsaludo').innerHTML = texto;
+
+    }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      mostrarSaludo();
+      mostrarDatos();
+      document.getElementById('flip-card-btn-turn-to-back').style.visibility = 'visible';
+      document.getElementById('flip-card-btn-turn-to-front').style.visibility = 'visible';
+
+      document.getElementById('flip-card-btn-turn-to-back').onclick = function () {
+        document.getElementById('flip-card').classList.toggle('do-flip');
+      };
+
+      document.getElementById('flip-card-btn-turn-to-front').onclick = function () {
+        document.getElementById('flip-card').classList.toggle('do-flip');
+      };
+    }, false);
+  </script>
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>

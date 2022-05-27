@@ -2,7 +2,7 @@
 
 from flask import Flask,render_template,Response,json,jsonify
 import cv2
-from test import LCCRecognition
+from LCCAplication import LCCRecognition
 
 
 app=Flask(__name__)
@@ -36,7 +36,15 @@ def video():
     #print(Response(recognition.Visualizar(),mimetype='multipart/x-mixed-replace; boundary=frame'))
     return Response(recognition.Visualizar(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
+@app.route('/get_current_user')
+def get_current_user():
+    return jsonify(
+        matricula=recognition.matricula,
+        gestoMano=recognition.msgMano,
+        SePuedeConsultar = recognition.SePuedeConsultar,
+        YaSeConsulto = recognition.YaSeConsulto,
+        PersonaSeFue = recognition.PersonaSeFue(),
+    )
 if __name__=="__main__":
     app.run(debug=True)
     
